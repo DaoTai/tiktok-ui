@@ -1,23 +1,25 @@
-import { useState, useEffect } from 'react';
-import classNames from 'classnames/bind';
-import Tippy from '@tippyjs/react/headless';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faQuestionCircle, faUser } from '@fortawesome/free-regular-svg-icons';
 import {
-    faCircleXmark,
-    faSpinner,
-    faMagnifyingGlass,
-    faEllipsisVertical,
+    faCloudUpload,
+    faCoins,
     faEarthAsia,
+    faEllipsisVertical,
+    faGear,
     faKeyboard,
+    faSignOut,
 } from '@fortawesome/free-solid-svg-icons';
-import { Wrapper as PopperWrapper } from '~/components/Popper';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Tippy from '@tippyjs/react';
+import classNames from 'classnames/bind';
+import 'tippy.js/dist/tippy.css';
 
-import Button from '~/components/Button';
-import styles from './Header.module.scss';
 import images from '~/assets/images';
-import AccountItem from '~/components/AccountItem';
+import Button from '~/components/Button';
+import { InboxIcon, MessageIcon } from '~/components/Icons';
+import Image from '~/components/Image';
 import Menu from '~/components/Popper/Menu';
-import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
+import styles from './Header.module.scss';
+import Search from '../Search';
 
 const cx = classNames.bind(styles);
 
@@ -53,12 +55,7 @@ const MENU_ITEMS = [
 ];
 
 function Header() {
-    const [searchResult, setSearchResult] = useState([]);
-    // useEffect(() => {
-    //     setTimeout(() => {
-    //         setSearchResult([1, 2, 3]);
-    //     }, 0);
-    // });
+    const currentUser = true;
 
     // Handle logic
     const handleMenuChange = (menuItem) => {
@@ -71,47 +68,79 @@ function Header() {
         }
     };
 
+    const userMenu = [
+        {
+            icon: <FontAwesomeIcon icon={faUser} />,
+            title: 'View Profile',
+            to: '/@tai',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faCoins} />,
+            title: 'Get coins',
+            to: '/coin',
+        },
+        {
+            icon: <FontAwesomeIcon icon={faGear} />,
+            title: 'Setting',
+            to: '/setting',
+        },
+        ...MENU_ITEMS,
+        {
+            icon: <FontAwesomeIcon icon={faSignOut} />,
+            title: 'Log out',
+            to: '/logout',
+            separate: true,
+        },
+    ];
+
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
                 <div className={cx('logo')}>
                     <img src={images.logo} alt="Tiktok" />
                 </div>
-                <Tippy
-                    interactive
-                    visible={searchResult.length > 0}
-                    render={(attrs) => (
-                        <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                            <PopperWrapper>
-                                <h4 className={cx('search-title')}>Accounts</h4>
-                                <AccountItem />
-                                <AccountItem />
-                                <AccountItem />
-                            </PopperWrapper>
-                        </div>
-                    )}
-                >
-                    <div className={cx('search')}>
-                        <input type="text" placeholder="Search accounts and videos" spellCheck={false} />
-                        <button className={cx('clear')}>
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                        </button>
-                        <div className={cx('loading')}>
-                            <FontAwesomeIcon icon={faSpinner} />
-                        </div>
-                        <button className={cx('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
-                        </button>
-                    </div>
-                </Tippy>
-                <div className={cx('actions')}>
-                    <Button text>Upload</Button>
-                    <Button primary>Log in</Button>
 
-                    <Menu items={MENU_ITEMS} onChange={handleMenuChange}>
-                        <button className={cx('more-btn')}>
-                            <FontAwesomeIcon icon={faEllipsisVertical} />
-                        </button>
+                {/* Search */}
+                <Search />
+                {/* actions */}
+                <div className={cx('actions')}>
+                    {currentUser ? (
+                        <>
+                            <Tippy delay={200} content="Upload video" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <FontAwesomeIcon icon={faCloudUpload} />
+                                </button>
+                            </Tippy>
+                            <Tippy delay={200} content="Message" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <MessageIcon />
+                                </button>
+                            </Tippy>
+                            <Tippy delay={200} content="Inbox" placement="bottom">
+                                <button className={cx('action-btn')}>
+                                    <InboxIcon />
+                                </button>
+                            </Tippy>
+                        </>
+                    ) : (
+                        <>
+                            <Button text>Upload</Button>
+                            <Button primary>Log in</Button>
+                        </>
+                    )}
+                    <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
+                        {currentUser ? (
+                            <Image
+                                className={cx('user-avatar')}
+                                src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/5725138afc9f055f84d8ea010cd64871~c5_300x300.webp?x-expires=1656126000&x-signature=dm3nlUAmBLmwKxfI8gqPd4pbROY%3D"
+                                alt="avatar"
+                                fallback="https://1401700980.rsc.cdn77.org/data/images/full/99589/fortnite-neymar-jr-cup-start-date-requirements-and-how-to-join.jpg?w=870"
+                            />
+                        ) : (
+                            <button className={cx('more-btn')}>
+                                <FontAwesomeIcon icon={faEllipsisVertical} />
+                            </button>
+                        )}
                     </Menu>
                 </div>
             </div>

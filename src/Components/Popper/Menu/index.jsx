@@ -16,7 +16,6 @@ function Menu({ children, items = [], onChange = defaultFn }) {
     const renderItems = () => {
         return current.data.map((item, i) => {
             const isParent = !!item.children;
-
             return (
                 <MenuItem
                     key={i}
@@ -35,6 +34,7 @@ function Menu({ children, items = [], onChange = defaultFn }) {
     return (
         <Tippy
             delay={[0, 800]}
+            offset={[12, 10]}
             placement="bottom-end"
             interactive
             render={(attrs) => (
@@ -52,6 +52,7 @@ function Menu({ children, items = [], onChange = defaultFn }) {
                     </PopperWrapper>
                 </div>
             )}
+            onHide={() => setHistory((prev) => prev.slice(0, 1))}
         >
             {children}
         </Tippy>
