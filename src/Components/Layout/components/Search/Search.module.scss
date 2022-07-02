@@ -64,6 +64,10 @@ $searchButtonWidth: 52px;
     color: rgba(22, 24, 35, 0.34);
 }
 
+.loading {
+    animation: spinner 1s linear infinite;
+}
+
 .search-btn {
     width: $searchButtonWidth;
     height: 100%;
@@ -80,5 +84,14 @@ $searchButtonWidth: 52px;
     &:hover {
         background-color: rgba(22, 24, 35, 0.03);
         cursor: pointer;
+    }
+}
+
+@keyframes spinner {
+    from {
+        transform: translateY(-50%) rotate(0);
+    }
+    to {
+        transform: translateY(-50%) rotate(360deg);
     }
 }
