@@ -19,7 +19,6 @@ $searchButtonWidth: 52px;
     border: 1.5px solid transparent;
     input {
         flex: 1;
-        padding-left: 16px;
         color: var(--black);
         font-size: 1.6rem;
         border: none;
@@ -28,6 +27,7 @@ $searchButtonWidth: 52px;
         padding: 12px 0;
         height: 100%;
         caret-color: var(--primary);
+        font-family: var(--font-family);
     }
     input:not(:placeholder-shown) ~ .search-btn {
         color: rgba(22, 24, 35, 0.75);

@@ -5,6 +5,7 @@ import styles from './AccountItem.module.scss';
 import Image from '~/components/Image';
 import { Link } from 'react-router-dom';
 const cx = classNames.bind(styles);
+
 function AccountItem({ data }) {
     return (
         <Link to={`/@${data.nickname}`} className={cx('wrapper')}>

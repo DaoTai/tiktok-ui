@@ -11,8 +11,10 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Tippy from '@tippyjs/react';
 import classNames from 'classnames/bind';
+import { Link } from 'react-router-dom';
 import 'tippy.js/dist/tippy.css';
 
+import routesConfig from '~/config/routes';
 import images from '~/assets/images';
 import Button from '~/components/Button';
 import { InboxIcon, MessageIcon } from '~/components/Icons';
@@ -96,9 +98,9 @@ function Header() {
     return (
         <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <div className={cx('logo')}>
+                <Link to={routesConfig.home} className={cx('logo-link')}>
                     <img src={images.logo} alt="Tiktok" />
-                </div>
+                </Link>
 
                 {/* Search */}
                 <Search />
@@ -106,7 +108,7 @@ function Header() {
                 <div className={cx('actions')}>
                     {currentUser ? (
                         <>
-                            <Tippy delay={200} content="Upload video" placement="bottom">
+                            <Tippy delay={[0, 50]} content="Upload video" placement="bottom">
                                 <button className={cx('action-btn')}>
                                     <FontAwesomeIcon icon={faCloudUpload} />
                                 </button>
@@ -118,6 +120,7 @@ function Header() {
                             </Tippy>
                             <Tippy delay={200} content="Inbox" placement="bottom">
                                 <button className={cx('action-btn')}>
+                                    <div className={cx('badge')}>12</div>
                                     <InboxIcon />
                                 </button>
                             </Tippy>
