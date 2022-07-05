@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-
 import { faCircleXmark, faMagnifyingGlass, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import HeadlessTippy from '@tippyjs/react/headless';
@@ -27,8 +26,7 @@ function Search() {
         }
 
         //  call API
-        // C1:
-        // axios
+        // C1: axios
         //     .get(`https://tiktok.fullstack.edu.vn/api/users/search`, {
         //         params: {
         //             q: debounced,

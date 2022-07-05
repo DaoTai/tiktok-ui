@@ -133,7 +133,7 @@ function Header() {
                         {currentUser ? (
                             <Image
                                 className={cx('user-avatar')}
-                                src="https://p16-sign-va.tiktokcdn.com/tos-maliva-avt-0068/5725138afc9f055f84d8ea010cd64871~c5_300x300.webp?x-expires=1656126000&x-signature=dm3nlUAmBLmwKxfI8gqPd4pbROY%3D"
+                                src="https://i.pinimg.com/736x/a0/6b/c5/a06bc59470b0e279d44e99d8687ead23.jpg"
                                 alt="avatar"
                                 fallback="https://1401700980.rsc.cdn77.org/data/images/full/99589/fortnite-neymar-jr-cup-start-date-requirements-and-how-to-join.jpg?w=870"
                             />
